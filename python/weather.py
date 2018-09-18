@@ -58,7 +58,7 @@ data = [
     ]
 
 if __name__ == '__main__':
-    print isTempUnder(data[1], 1.4)
-    print isHumidityOver(data[1], 0.3)
-    print isCloudHeightUnder(data[1], 42)
-    print snowChance(data)
+    print(isTempUnder(data[1], 1.4))
+    print(isHumidityOver(data[1], 0.3))
+    print(isCloudHeightUnder(data[1], 42))
+    print(snowChance(data))
