@@ -1,2 +1,2 @@
-# chegg
-To keep cheeg solved problems
+# Chegg
+Python solved problems
