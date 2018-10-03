@@ -27,15 +27,15 @@ for studGrade in data:
     for grade in grades:
         totGrade += grade
     avg = totGrade / 5.0
-    if avg >= 90 and avg <= 100:
+    if avg >= 90 and avg <= 100:		#if avg is between 90 and 100.
         ranks['A'] += 1
-    elif avg >= 80 and avg <= 89:
+    elif avg >= 80 and avg <= 89:		#else if avg is between 80 and 89.
         ranks['B'] += 1
-    elif avg >= 70 and avg <= 79:
+    elif avg >= 70 and avg <= 79:		#else if avg is between 70 and 79.
         ranks['C'] += 1
-    elif avg >= 60 and avg <= 69:
+    elif avg >= 60 and avg <= 69:		#else if avg is between 60 and 69.
         ranks['D'] += 1
-    else:
+    else:								#else statement.
         ranks['F'] += 1
 
 # drawing bar chart

@@ -12,20 +12,20 @@ print(data)
 grades = []
 for marks in data:
  row = list(map(int,marks.split(',')))
- tot = 0
+ tot = 0						#variable declaration and initalisation.
  for mark in row:
-  tot += mark
+  tot += mark                   #tot = tot+mark.
  avg = tot / 5.0
- print(avg)
- if avg >= 90 and avg <= 100:
+ print(avg)					    #print avg.
+ if avg >= 90 and avg <= 100:	#if avg is between 90 and 100.
   rank['A'] += 1
- elif avg >= 80 and avg <= 89:
+ elif avg >= 80 and avg <= 89:  #else if avg is between 80 and 89.
   rank['B'] += 1
- elif avg >= 70 and avg <= 79:
+ elif avg >= 70 and avg <= 79:  #else if avg is between 70 and 79.
   rank['C'] += 1
- elif avg >= 60 and avg <= 69:
+ elif avg >= 60 and avg <= 69:  #else if avg is between 60 and 69.
   rank['D'] += 1
- else:
+ else:						    #else statement.
   rank['F'] += 1
 
 #plt.bar(rank.keys(), rank.values(), align='center')
@@ -43,6 +43,5 @@ plt.show()
 #plt.xticks(range(len(rank)), rank.keys())
 
 #plot_url = py.plot_mpl(dictionary, filename='mpl-dictionary')
- 
+
 #if __name__ == "__main__":
-	

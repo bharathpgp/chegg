@@ -3,30 +3,30 @@
 from node import Node
 
 
-def length(head):
+def length(head):			#defining length function.
     """Returns the number of items in the linked structure
 ....referred to by head."""
 
     probe = head
-    count = 0
-    while probe:
-        count += 1
+    count = 0				#variable declaration and initialisation.
+    while probe:			#starting of the loop.
+        count += 1			#increment expression.
         probe = probe.next
-    return count
+    return count			#ending of loop.
 
 
-def insert(newItem, head):
+def insert(newItem, head):	#defining insert function.
     """Inserts newItem at the correct position (ascending order) in
 ....the linked structure referred to by head.
 ....Returns a reference to the new structure."""
 
-    if head is None:
+    if head is None:  		   #if statement.
         head = Node(newItem)
-    elif head.data >= newItem:
+    elif head.data >= newItem: #else if statement.
         tmp = head
         head = Node(newItem)
         head.next = tmp
-    else:
+    else:					  #else statement.
         tmp = head
         while tmp.next is not None and tmp.next.data < newItem:
             tmp = tmp.next
@@ -36,13 +36,13 @@ def insert(newItem, head):
     return head
 
 
-def printStructure(head):
+def printStructure(head):	#defining printStructure function.
     while head:
         print head.data
         head = head.next
 
 
-def main():
+def main():					#defining main function.
     """Gets words from the user and inserts in the
 ....structure referred to by head."""
 
@@ -62,5 +62,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-			
