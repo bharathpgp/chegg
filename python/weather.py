@@ -1,48 +1,35 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# row = [hour, temprature, relHumidity, [cloudCover, cloudHeight], [windSpdLow, windSpdHigh]]
+# row = [hour, temperature, relHumidity, [cloudCover, cloudHeight], [windSpdLow, windSpdHigh]]
 
 
 def isTempUnder(row, temp):
-    if row[1] < temp:
-        return True
-    else:
-        return False
+    return row[1] < temp
 
 
 def isHumidityOver(row, percent):
-    if row[2] > percent:
-        return True
-    else:
-        return False
+    return row[2] > percent
 
 
 def isCloudHeightUnder(row, height):
     (cloudCover, cloudHeight) = row[3]
-    if cloudHeight < height:
-        return True
-    else:
-        return False
+    return cloudHeight < height
 
 
 def snowChance(data):
-    totRows = data.__len__()
+    totRows = len(data)
     snowCnt = 0.0
     hours = []
     for row in data:
-        relHumidity = row[2]
-        temprature = row[1]
-        (cloudCover, cloudHeight) = row[3]
-        if relHumidity > 0.8 and temprature < 0.5 and cloudHeight \
-            < 1000:
+        row0, temperature, relHumidity, cloud, row4 = row
+        if relHumidity > 0.8 and \
+            temperature < 0.5 and \
+            cloud[1] < 1000:
             snowCnt += 1
-            hours.append(row[0])
+            hours.append(row0)
     hours.sort()
     chance = snowCnt / totRows
-    if snowCnt == 0:
-        time = 0
-    else:
-        time = hours[-1] - hours[0]
+    time = 0 if snowCnt == 0 else hours[-1] - hours[0]
     return [chance, time]
 
 
