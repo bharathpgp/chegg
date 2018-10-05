@@ -1,5 +1,10 @@
+#Open movie file in read mode
 file_ref = open("movies.txt", 'r')
+
+#Get user input of year
 year_input = int(input("Please enter a year from 1880-2050:"))
+
+#Test user input
 if year_input < 1880 or year_input > 2050:
     print("Invalid year")
 else:
@@ -11,4 +16,5 @@ else:
         if int(movie_data[1]) == year_input:
             print(movie_data[0])
         line = file_ref.readline()
+#close file
 file_ref.close()
