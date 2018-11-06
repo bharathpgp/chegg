@@ -1,1 +1,7 @@
-** Please, Optimizing python code in this repo and write great comments **
+**Optimize python code in this repo**
+
+**Use different features of python language**
+
+**Write great comments**
+
+**Add docstring**
