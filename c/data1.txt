@@ -1,0 +1,18 @@
+10
+Sam
+Thomas
+Judy
+Sue
+Anne
+Todd
+Elsa
+Jay
+Brad
+Joe
+Sam Thomas
+Sue Anne
+Elsa Brad
+Todd Sam
+Anne Todd
+Judy Jay
+-1 -1
