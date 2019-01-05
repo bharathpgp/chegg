@@ -1,0 +1,5 @@
+76543 Mary mary@csusm.edu 19
+98765 Kathy kathy@csusm.edu 30
+16438 Flora flora@csusm.edu 25
+43260 Peter peter@csusm.edu 29
+87590 kim kim@csusm.edu 31

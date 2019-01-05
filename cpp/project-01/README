@@ -1,0 +1,386 @@
+Skip Navigation
+Textbook Solutions
+Expert Q&A
+home / study / engineering / computer science / expert question / ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------...
+Time remaining to complete the answer : 117:38
+Question in Computer Science
+
+1. [65%] The following ab3tract cla33 Container 13 given: class Container public: virtual void in3ert (int x) = 0; virtual int remove() = 0; virtual bool empty ( ) const = 0; virtual Container ( where the virtual destructor has the trivial implementation: Container:Container ) The idea is that int items can be inserted into a container, and later retrieved by the remove function. The order in which the items will be retrieved depends on the implementation of subclasses The header file and implementation file for the Container class can be found in: [container.h] [container.cpp]- You are NOT allowed to modify these files. Doing so will result in SEVERE mark deduction. Implement three concrete subclasses of Container: Queue This class implements a first-in-first-out retrieval strategy Specifically, items are retrieved in the same order they are inserted Items that are inserted early will be removed first. As for data representation, you want to reuse ManagedArray by composition. Items are always inserted to the end of the managed array, and removed from the front of the managed array. In this way, early arrivers will leave early Stack This class implements a last-in-first-out retrieval strategy Specifically, items are retrieved in an order opposite to the order in which they are inserted. That is, items that are inserted late will be removed first. Again, you want to reuse ManagedArray by composition Items are always inserted to the end of the managed array, and removed from the end as well1. Consequently, late arrivers will be removed first
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROVIDED CODE HERE
+
+guarded_array.h
+
+#ifndef __GUARDED_ARRAY_H__
+#define __GUARDED_ARRAY_H__
+
+typedef int ItemType;
+
+const unsigned MAX_LENGTH = 500;
+
+//
+// GuardedArray
+// - A wrapper class for C++ arrays to make array access safe.
+//   Specifically, initialization is guaranteed, and assertions are
+//   in place to detect array index out of bound errors in array member
+//   accesses.
+//
+
+class GuardedArray {
+public:
+  //
+  // Constructor
+  //
+  // Purpose: Initializes array elements to zeros
+  // Argument(s): N/A
+  // Side Effect: All array elements are initialized to zero.
+  // Return: N/A
+  //
+
+  GuardedArray();
+
+  //
+  // Constructor
+  //
+  // Purpose: Initializes all array elements to a given value.
+  // Argument(s):
+  //  x : value to which array elements should be initialized.
+  // Side Effect: All array elements are initialized to x.
+  // Return: N/A
+  //
+
+  GuardedArray(ItemType x);
+
+  //
+  // read
+  //
+  // Purpose: Read array element at index i.
+  // Argument(s):
+  //  i : index of element to be read.
+  // Precondition(s): i < MAX_LENGTH
+  // Return: Value of array element at index i
+  // 
+
+  ItemType read(unsigned i) const;
+
+  //
+  // write
+  //
+  // Purpose: Write x into array element at index i.
+  // Argument(s):
+  //  i : index of array element to be overwritten.
+  //  x : value to be stored into array.
+  // Precondition(s): i < MAX_LENGTH.
+  // Side Effect: The array element at index i will be 
+  //              overwritten by x.
+  // Return: N/A
+  //
+
+  void write(unsigned i, ItemType x);
+
+private:
+
+  ItemType array[MAX_LENGTH];
+
+};
+
+#endif
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+guarded_array.cpp
+
+#include <cassert>
+#include "guarded_array.h"
+
+GuardedArray::GuardedArray() {
+  for (unsigned i = 0; i < MAX_LENGTH; i++)
+    array[i] = 0;
+}
+
+GuardedArray::GuardedArray(ItemType x) {
+  for (unsigned i = 0; i < MAX_LENGTH; i++)
+    array[i] = x;
+}
+
+ItemType GuardedArray::read(unsigned i) const {
+  assert(i < MAX_LENGTH);
+  return array[i];
+}
+
+void GuardedArray::write(unsigned i, ItemType x) {
+  assert(i < MAX_LENGTH);
+  array[i] = x;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+managed_array.h
+
+#ifndef __MANAGED_ARRAY_H__
+#define __MANAGED_ARRAY_H__
+
+#include "guarded_array.h"
+
+//
+// ManagedArray
+// - A wrapper class for C++ arrays to facilitate insertion and removal of
+//   array elements.
+// - Every instance of ManagedArray has a size that can be increased
+//   until the maximum capacity MAX_LENGTH is reached.
+//
+
+class ManagedArray {
+public:
+  //
+  // Constructor
+  //
+  // Purpose: Initializes array to have zero size.
+  // Argument(s): N/A
+  // Side Effect: The array is initialized to be empty.
+  // Return: N/A
+  //
+
+  ManagedArray();
+
+  //
+  // Constructor
+  //
+  // Purpose: Initializes array to a given size.  All array elements
+  //          are initialized to zero.
+  // Argument(s):
+  //  N : size of array
+  // Precondition: N <= MAX_LENGTH
+  // Side Effect: The array is initialized to contain N occurrences
+  //              of the number zero.
+  // Return: N/A
+  //
+
+  ManagedArray(unsigned N);
+
+  //
+  // Constructor
+  //
+  // Purpose: Initializes array to a given size.  All array elements
+  //          are initialized to x.
+  // Argument(s):
+  //  N : size of array
+  //  x : initial value of array elements
+  // Precondition: N <= MAX_LENGTH
+  // Side Effect: The array is initialized to contain N occurrences
+  //              of x.
+  // Return: N/A
+  //
+
+  ManagedArray(unsigned N, ItemType x);
+
+  //
+  // size
+  //
+  // Purpose: Return the current size of the array.
+  // Argument(s): N/A
+  // Return: current size of the array
+  //
+
+  unsigned size() const;
+
+  //
+  // read
+  //
+  // Purpose: Read array element at index i.
+  // Argument(s):
+  //  i : index of element to be read.
+  // Precondition: i < size()
+  // Return: Value of array element at index i.
+  //
+
+  ItemType read(unsigned i) const;
+
+  //
+  // write
+  //
+  // Purpose: Write x into array element at index i.
+  // Argument(s):
+  //  i : index of array element to be overwritten.
+  //  x : value to be written into array.
+  // Precondition: i < size()
+  // Return: N/A.
+  //
+
+  void write(unsigned i, ItemType x);
+
+  //
+  // insert
+  //
+  // Purpose: Insert an element into the array.
+  // Argument(s):
+  //  i : index at which x is to be inserted
+  //  x : value to be inserted into array.
+  // Precondition: i <= size() && size() < MAX_LENGTH
+  // Side Effect: The new element x will be inserted into the
+  //              the array at index i.  Array elements will be 
+  //              shifted to make room for x.  The array size 
+  //              will be increased by one.
+  // Return: N/A.
+  //
+
+  void insert(unsigned i, ItemType x);
+
+  //
+  // remove(i)
+  //
+  // Purpose: Remove an element from the array.
+  // Argument(s):
+  //   i : index of the element to be removed.
+  // Precondition: i < size() && size() > 0
+  // Side Effect: Remove the array element at index i.  Array 
+  //              elements will be shifted to fill the "gap" left 
+  //              by the removed element.  The array size will be 
+  //              decreased by one.
+  // Return: N/A.
+  //
+
+  void remove(unsigned i);
+
+private:
+
+  unsigned count;
+  GuardedArray array;
+
+};
+
+#endif
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+managed_array.cpp
+
+#include <cassert>
+#include "managed_array.h"
+
+ManagedArray::ManagedArray() : array() {
+  count = 0;
+}
+
+ManagedArray::ManagedArray(unsigned N) : array() {
+  assert(N <= MAX_LENGTH);
+  count = N;
+}
+
+ManagedArray::ManagedArray(unsigned N, ItemType x) : array(x) {
+  assert(N <= MAX_LENGTH);
+  count = N;
+}
+
+unsigned ManagedArray::size() const {
+  return count;
+}
+
+ItemType ManagedArray::read(unsigned i) const {
+  assert(i < count);
+  return array.read(i);
+}
+
+void ManagedArray::write(unsigned i, ItemType x) {
+  assert(i < count);
+  array.write(i, x);
+}
+
+void ManagedArray::insert(unsigned i, ItemType x) {
+  assert(i <= count && count < MAX_LENGTH);
+  for (unsigned j = count; j > i; j--)
+    array.write(j, array.read(j-1));
+  array.write(i, x);
+  count++;
+}
+
+void ManagedArray::remove(unsigned i) {
+  assert(i < count && count > 0);
+  for (unsigned j = i; j < count - 1; j++)
+    array.write(j, array.read(j+1));
+  count--;
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+container.h
+
+#ifndef __CONTAINER_H__
+#define __CONTAINER_H__
+
+class Container {
+public:
+  virtual void insert(int x) = 0;
+  virtual int remove() = 0;
+  virtual bool empty() const = 0;
+  virtual ~Container();
+};
+
+#endif
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+container.cpp
+
+#include "container.h"
+
+Container::~Container() { }
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+process.h
+
+#ifndef __PROCESS_H__
+#define __PROCESS_H__
+
+#include "container.h"
+
+void process_sequence(Container& c);
+
+#endif
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+process.cpp
+
+#include <iostream>
+
+using namespace std;
+
+#include "process.h"
+
+void process_sequence(Container& c) {
+  int x;
+
+  // Read input sequence
+  
+  cin >> x;
+  while (cin) {
+    c.insert(x);
+    cin >> x;
+  }
+  
+  // Write output sequence
+
+  while (! c.empty()) {
+    cout << c.remove() << endl;
+  }
+}
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+files to be created
+
+- Queue.h, Queue.cpp
+
+- Stack.h, Stack.cpp
+
+- PriorityQueue.h, PriorityQueue.cpp
+
+- Sort.cpp, reverse.cpp, nop.cpp
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+ANY HELP WOULD BE APPRECIATED
