@@ -1,0 +1,8 @@
+Chris:Smith:20:15.75
+Mary:Peters:40:18.00
+Mike:Jones:35:12.50
+Ann:Roberts:25:10.75
+John:King:25:15.75
+Ken:Stewart:32:12.50
+Joan:Silvers:20:12.50
+Karen:King:30:12.50

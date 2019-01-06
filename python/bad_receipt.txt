@@ -1,0 +1,12 @@
+Blake's Bean Shop
+8274220 N Green Drive E,
+Apartment 130
+Easton, MN 54492-3041
+Store #1041
+Clerk: David Gross
+MEMBER #32831
+E 1031023 Blake's Scrt Baked $302.10
+E 60 Big Barrel O Beans $10379.13
+SUBTOTAL: $10,681.24
+TAX: $747.69
+TOTAL: $11,428.93
