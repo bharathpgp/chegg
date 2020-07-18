@@ -2,18 +2,26 @@
 # -*- coding: utf-8 -*-
 # row = [hour, temperature, relHumidity, [cloudCover, cloudHeight], [windSpdLow, windSpdHigh]]
 
+# Function to test temperature
+
 
 def isTempUnder(row, temp):
     return row[1] < temp
+
+# Function to test humidity
 
 
 def isHumidityOver(row, percent):
     return row[2] > percent
 
+# Function to test cloud height
+
 
 def isCloudHeightUnder(row, height):
     (cloudCover, cloudHeight) = row[3]
     return cloudHeight < height
+
+# Function to test chance of snow
 
 
 def snowChance(data):
@@ -23,8 +31,8 @@ def snowChance(data):
     for row in data:
         row0, temperature, relHumidity, cloud, row4 = row
         if relHumidity > 0.8 and \
-            temperature < 0.5 and \
-            cloud[1] < 1000:
+                temperature < 0.5 and \
+                cloud[1] < 1000:
             snowCnt += 1
             hours.append(row0)
     hours.sort()
@@ -33,6 +41,7 @@ def snowChance(data):
     return [chance, time]
 
 
+# Dictionary of data to be tested
 data = [
     [0, 1.5, 0.4, [0.3, 42], [5.1, 10.0]],
     [10, 1.4, 0.3, [0.2, 41], [6.2, 8.6]],
@@ -42,8 +51,9 @@ data = [
     [2, 20.4, 0.3, [0.2, 11000], [105.6, 118.7]],
     [5, -9.2, 0.2, [0.93, 1001], [6.2, 6.3]],
     [15, -2.4, 0.1, [0.95, 1981], [7.4, 8.5]],
-    ]
+]
 
+# Main program loop
 if __name__ == '__main__':
     print(isTempUnder(data[1], 1.4))
     print(isHumidityOver(data[1], 0.3))
