@@ -1,0 +1,6 @@
+*.out
+*.class
+*.o
+.vscode
+*.swp
+__pycache__

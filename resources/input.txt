@@ -1,0 +1,4 @@
+1a:23:4b:2c:df:c1 11:2b:3c:ac:df:12 2
+1a:23:4b:22:11:34 12:aa:cc:df:ac:10 3
+1a:23:4b:2c:df:c1 aa:bb:cc:df:ac:22 2
+aa:bb:cc:df:ac:22 1a:23:4b:22:11:34 1
