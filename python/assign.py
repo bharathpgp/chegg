@@ -2,7 +2,6 @@ import matplotlib.pyplot as plt
 import plotly.plotly as py
 import plotly
 
-#plotly.tools.set_credentials_file(username='bharathpgp', api_key='uYE3aoJd4ZTyDOCWO8JU')
 dictionary = plt.figure()
 
 file="/tmp/grades.txt"
@@ -45,4 +44,3 @@ plt.show()
 #plot_url = py.plot_mpl(dictionary, filename='mpl-dictionary')
  
 #if __name__ == "__main__":
-	
